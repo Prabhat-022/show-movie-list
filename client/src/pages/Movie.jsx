@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Filter, Star, Calendar, Globe, Languages } from 'lucide-react';
 
-const Movie = ({ movie }) => {
+const Movie = ({movie}) => {
     const data = movie.results;
 
     const [languageFilter, setLanguageFilter] = useState('');
@@ -14,12 +14,12 @@ const Movie = ({ movie }) => {
     const moviesPerPage = 10;
 
     // Extract unique languages, countries, and genres from the data
-    const allLanguages = [...new Set(data.flatMap(movie => movie.movielanguages || []))];
-    const allCountries = [...new Set(data.flatMap(movie => movie.moviecountries || []))];
-    const allGenres = [...new Set(data.flatMap(movie => movie.moviegenres || []))];
+    const allLanguages = [...new Set(data?.flatMap(movie => movie.movielanguages || []))];
+    const allCountries = [...new Set(data?.flatMap(movie => movie.moviecountries || []))];
+    const allGenres = [...new Set(data?.flatMap(movie => movie.moviegenres || []))];
 
     // Filter movies based on selected filters
-    const filteredMovies = data.filter((movie) => {
+    const filteredMovies = data?.filter((movie) => {
         const languageMatch = languageFilter ? (movie.movielanguages || []).includes(languageFilter) : true;
         const countryMatch = countryFilter ? (movie.moviecountries || []).includes(countryFilter) : true;
         const genreMatch = genreFilter ? (movie.moviegenres || []).includes(genreFilter) : true;
@@ -52,10 +52,11 @@ const Movie = ({ movie }) => {
         setCurrentPage(1);
     };
 
-    const showMovieDetails = (movie) => {
+    const showMovieDetails = () => {
         navigate(`/`);
         // return <MovieDetailsPage movie={movie} />;
     }
+
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
